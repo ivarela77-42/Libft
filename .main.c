@@ -6,7 +6,7 @@
 /*   By: ivanrodr <ivanrodr@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 22:43:38 by ivanrodr          #+#    #+#             */
-/*   Updated: 2024/01/03 22:49:05 by ivanrodr         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:10:44 by ivanrodr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ void	print_list(t_list *head)
 	current = head;
 	while (current)
 	{
-		printf("%s\n", (char *) current->content);
+		if (current->content != NULL)
+			printf("%s\n", (char *) current->content);
+		else
+			printf("-- Nodo sin contenido --");
 		current = current->next;
 	}
 }
@@ -41,6 +44,35 @@ void	print_list(t_list *head)
 void	ft_del(void *content)
 {
 	free(content);
+}
+
+void	iter(void *content)
+{
+	char	*temp;
+	int	index;
+
+	temp = (char *) content;
+	index = 0;
+	while (temp[index])
+	{
+		temp[index] = ft_toupper(temp[index]);
+		index++;
+	}
+}
+
+void	*map(void *content)
+{
+	char	*temp1;
+	char	*temp2;
+	char	*joined;
+	char	*result;
+
+	temp1 = ft_strdup("\t - ");
+	temp2 = (char *) content;
+	temp2[0] = ft_toupper(temp2[0]);
+	joined = ft_strjoin(temp1, temp2);
+	result = ft_strdup(joined);
+	return (result);
 }
 
 int	main(void)
